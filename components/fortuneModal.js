@@ -7,8 +7,8 @@ export default function FortuneModal(props) {
             visible={props.show[0]}
             onRequestClose={props.setShow}
         >
-            <StatusBar backgroundColor="teal" />
-            <View style={styles.modalContainer}>
+            <StatusBar backgroundColor={props.show[2]} />
+            <View style={[styles.modalContainer, {backgroundColor: props.show[2]}]}>
                 <Text style={styles.closeX} onPress={props.setShow}>X</Text>
                 <Text style={styles.fortuneMessage}>{props.show[1].text}</Text>
                 <Text style={styles.dateBox}>{new Date(props.show[1].date).toDateString().replace(/[A-Za-z]*\s/, "").replace(/\s(?=\d{4})/, ', ')}</Text>
@@ -19,7 +19,6 @@ export default function FortuneModal(props) {
 
 const styles = StyleSheet.create({
     modalContainer: {
-        backgroundColor:'teal',
         height: '100%',
         flex: 1,
         alignItems: 'center',
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         alignSelf: 'flex-end',
-        padding: 5,
+        textAlignVertical: 'center',
         position:'absolute',
         top: 0
     },
