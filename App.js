@@ -6,23 +6,25 @@ import FortuneModal from './components/fortuneModal';
 import InputModal from './components/inputModal';
 
 export default function App() {
-  const [fortune, setFortune] = useState([false, {}, ""]);
-  const [input, setInput] =  useState(false);
+  const [fortuneModal, setFortuneModal] = useState([false, {}, ""]);
+  const [inputModal, setInputModal] =  useState(false);
   const color = ['#00aaff', '#ac82fa', '#22ffaa', '#bf94e4', '#a8e6cf'];
   return (
     <View style={styles.container}>
-      <FortuneModal show={fortune} setShow={()=>setFortune([false, {}, ""])}/>
-      <InputModal show={input} setShow={() => setInput(false)}/>
+      <FortuneModal show={fortuneModal} setShow={()=>setFortuneModal([false, {}, ""])}/>
+      <InputModal show={inputModal} setShow={() => setInputModal(false)}/>
 
+      {/* A fixed header. */}
       <View style={styles.textContainer}>
         <Text style={styles.myfortunesText}>My Fortunes</Text>
-        <Text style={styles.addButton} onPress={()=>setInput(true)}>+</Text>
+        <Text style={styles.addButton} onPress={()=>setInputModal(true)}>+</Text>
       </View>
 
+      {/* JSON file data */}
       <ScrollView contentContainerStyle={{flexGrow:1}}>
         <View style={styles.fortunesContainer}>
         {data.fortunes.reverse().map((fortune, index) => {
-          var selectedColor = 0;
+          var selectedColor = '';
           if(index%5 === 0) {
             selectedColor = color[0];
           } else if(index%5 === 1) {
@@ -36,9 +38,9 @@ export default function App() {
           }
           return (
             <TouchableOpacity style={[styles.fortuneBox, {backgroundColor:selectedColor}]} key={index}
-            onPress={()=>setFortune([true, fortune, selectedColor])}>
+            onPress={()=>setFortuneModal([true, fortune, selectedColor])}>
               <Text style={{color: 'white', marginHorizontal: 7}}>{fortune.text}</Text>
-              <Text style={{color: 'white'}}>{new Date(fortune.date).toDateString().replace(/[A-Za-z]*\s/, "").replace(/\s(?=\d{4})/, ', ')}</Text>
+              <Text style={styles.dateBox}>{new Date(fortune.date).toDateString().replace(/[A-Za-z]*\s/, "").replace(/\s(?=\d{4})/, ', ')}</Text>
             </TouchableOpacity>);
         })}
         </View>
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
   fortuneBox: {
     borderRadius: 5,
     width: '48%',
-    height: 100,
+    height: 120,
     marginBottom: 5,
     marginLeft: 5,
     alignItems:'center',
@@ -89,5 +91,13 @@ const styles = StyleSheet.create({
     width: 50,
     textAlign: 'center',
     textAlignVertical: 'center',
+  },
+  dateBox: {
+    color: 'white',
+    borderRadius: 5,
+    backgroundColor: 'rgba(255,255,255,.3)',
+    height: 20,
+    width: 100,
+    textAlign: 'center',
   }
 });

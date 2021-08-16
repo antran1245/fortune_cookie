@@ -9,7 +9,7 @@ export default function FortuneModal(props) {
         >
             <StatusBar backgroundColor={props.show[2]} />
             <View style={[styles.modalContainer, {backgroundColor: props.show[2]}]}>
-                <Text style={styles.closeX} onPress={props.setShow}>X</Text>
+                <Text style={[styles.closeX, {color: props.show[2]}]} onPress={props.setShow}>X</Text>
                 <Text style={styles.fortuneMessage}>{props.show[1].text}</Text>
                 <Text style={styles.dateBox}>{new Date(props.show[1].date).toDateString().replace(/[A-Za-z]*\s/, "").replace(/\s(?=\d{4})/, ', ')}</Text>
             </View>
@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
     },
     closeX: {
         backgroundColor: 'white',
-        width: 30,
-        height: 30,
+        width: 50,
+        height: 50,
         borderRadius: 50,
         textAlign: 'center',
         fontWeight: 'bold',
