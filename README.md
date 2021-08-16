@@ -1,6 +1,6 @@
 # fortune_cookie
 
-###Information
+### Information
 Created using React Native.
 New entry will be created to the existing fortunes when the done text is click, but will not be added to the JSON file.
 
